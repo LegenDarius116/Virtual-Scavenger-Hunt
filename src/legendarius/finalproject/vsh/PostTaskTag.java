@@ -26,6 +26,8 @@ import android.util.Log;
 
 /** Server returns TOKEN_INVALID */
 
+//https://androidtutorialmagic.wordpress.com/oauth2-tutorial-in-android/curl-to-http-post-request-in-android-volley/
+
 public class PostTaskTag extends AsyncTask<String, String, String> {
 	
 	private HttpClient httpclient;
@@ -43,18 +45,21 @@ public class PostTaskTag extends AsyncTask<String, String, String> {
 	    	httpclient = new DefaultHttpClient();
 	    	HttpPost httppost = new HttpPost(new URI("https://api.clarifai.com/v1/tag/"));
 	    	httppost.addHeader(BasicScheme.authenticate(
-	    			new UsernamePasswordCredentials("Authorization: Bearer", Credentials.accessToken),
+	    			new UsernamePasswordCredentials("Authorization: Bearer ", "XgAEnBXe0l0ki5kgOcVhxlYZi1veXX"),
 	    			HTTP.UTF_8, false));
 	    	
 	    	List<NameValuePair> nvp = new ArrayList<NameValuePair>(1);
 	    	
+	    	// determines whether the URL example will be used or the local file on smartphone
 	    	if (useURL == true)
-	    		nvp.add(new BasicNameValuePair("url", "https://samples.clarifai.com/metro-north.jpg"));
+	    		{ nvp.add(new BasicNameValuePair("url", "https://samples.clarifai.com/metro-north.jpg")); }
 	    	else 
-	    		nvp.add(new BasicNameValuePair("encoded_data", "@" + CamController.scavDir));
-
+	    		{ nvp.add(new BasicNameValuePair("encoded_data", "@" + CamController.scavDir)); }
 	   		
 	  		Log.i("Directory check", CamController.scavDir);
+	  		
+	  		// might check the contents of nvp here
+	  		
 	  		
 	    	httppost.setEntity(new UrlEncodedFormEntity(nvp));
 	    		
@@ -63,8 +68,7 @@ public class PostTaskTag extends AsyncTask<String, String, String> {
 	    	Log.i("TagTest", resp); // Token invalid, authentication error returned
 	    	
 	    	JSONObject jo = new JSONObject(resp);
-		} catch (ClientProtocolException e) {} catch (IOException e) {} catch (JSONException e) {} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

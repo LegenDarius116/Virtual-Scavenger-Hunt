@@ -7,6 +7,7 @@ import java.util.Random;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -101,8 +102,10 @@ public class RandomChallenge extends Activity implements Button.OnClickListener 
 				break;
 			case R.id.btnTestTag:
 				
+				
 		        try {
-		        	new PostTaskTag().execute(); 
+		        	//new URLTagTask().execute(); 
+		        	new PostTaskTag().execute();
 		        } catch (Exception e) { e.printStackTrace(); }
 				
 				break;
@@ -130,4 +133,17 @@ public class RandomChallenge extends Activity implements Button.OnClickListener 
 		}
 	}
 
+}
+
+class URLTagTask extends AsyncTask<String, String, String> {
+
+	@Override
+	protected String doInBackground(String... arg0) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		return null;
+	}
+	
 }

@@ -22,6 +22,8 @@ import android.util.Log;
 /** This is an asynchronous task sending a POST Request to Clarifai server */
 /** in order to receive an access token, which is needed to use the API */
 
+
+
 public class PostTask extends AsyncTask<String, String, String> {
 	
 	private HttpClient httpclient;
