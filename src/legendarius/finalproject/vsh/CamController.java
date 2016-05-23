@@ -8,17 +8,13 @@ import android.view.View;
 
 public class CamController {
 	public static final int PICTURE_TAKING_CODE = 47;
-	public static int count = 0;
-	public static final String PHOTO_DIRECTORY = 
-			Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Scavenger Hunt/";
+
+	public static final String SCAVENGER_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Scavenger Hunt/scavTemp.jpg";
 	
-	public static String scavDir = "";
+	// might be deprecated soon
+	public static int count = 0;
 	
 	public static void incrementScavengerImageIndex() {
 		count++;
-	}
-	
-	public static void setScavDirectory(String dir) {
-		scavDir = dir;
 	}
 }
