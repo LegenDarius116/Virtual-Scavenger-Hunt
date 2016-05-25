@@ -54,9 +54,9 @@ public class PostTaskTag extends AsyncTask<String, String, String> {
 	    	if (useURL == true)
 	    		{ nvp.add(new BasicNameValuePair("url", "https://samples.clarifai.com/metro-north.jpg")); }
 	    	else 
-	    		{ nvp.add(new BasicNameValuePair("encoded_data", "@" + CamController.scavDir)); }
+	    		{ nvp.add(new BasicNameValuePair("encoded_data", "@" + CamController.SCAVENGER_FILE)); }
 	   		
-	  		Log.i("Directory check", CamController.scavDir);
+	  		Log.i("Directory check", CamController.SCAVENGER_FILE);
 	  		
 	  		// might check the contents of nvp here
 	  		

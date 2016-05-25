@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
         // Here, we are making a folder named picFolder to store
         // pics taken by the camera using this application.
         
-        File newdir = new File(CamController.PHOTO_DIRECTORY);
+        File newdir = new File(CamController.BASE_PHOTO_DIRECTORY);
         newdir.mkdirs();
         
         try {

@@ -9,8 +9,9 @@ import android.view.View;
 public class CamController {
 	public static final int PICTURE_TAKING_CODE = 47;
 
-	public static final String SCAVENGER_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Scavenger Hunt/scavTemp.jpg";
-	
+	public static final String BASE_PHOTO_DIRECTORY = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Scavenger Hunt";
+	public static final String SCAVENGER_FILE = BASE_PHOTO_DIRECTORY + "/scavTemp.jpg";
+
 	// might be deprecated soon
 	public static int count = 0;
 	

@@ -150,7 +150,8 @@ public class RandomChallenge extends Activity implements Button.OnClickListener 
                     preview.setImageBitmap(taken);
 
                     if (taken != null) {
-                        preview.setImageBitmap(taken);
+                        // imageview currently not displaying image
+                        preview.setImageBitmap(Bitmap.createScaledBitmap(taken, 120, 120, false));
                         log.setText("Scanning image...");
                         camButton.setEnabled(false);
 
@@ -195,29 +196,6 @@ public class RandomChallenge extends Activity implements Button.OnClickListener 
 		}
 	}
 
-    /** Loads a Bitmap from a content URI returned by the media picker. */
-    private Bitmap loadBitmapFromUri(Uri uri, ImageView iv) {
-        try {
-            // The image may be large. Load an image that is sized for display. This follows best
-            // practices from http://developer.android.com/training/displaying-bitmaps/load-bitmap.html
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
-            int sampleSize = 1;
-            while (opts.outWidth / (2 * sampleSize) >= iv.getWidth() &&
-                    opts.outHeight / (2 * sampleSize) >= iv.getHeight()) {
-                sampleSize *= 2;
-            }
-
-            opts = new BitmapFactory.Options();
-            opts.inSampleSize = sampleSize;
-            return BitmapFactory.decodeStream(getContentResolver().openInputStream(uri), null, opts);
-        } catch (IOException e) {
-            Log.e("LoadBitmap Method", "Error loading image: " + uri, e);
-        }
-        return null;
-    }
-
     /** Sends the given bitmap to Clarifai for recognition and returns the result. */
     private RecognitionResult recognizeBitmap(Bitmap bitmap) {
         try {
@@ -237,25 +215,5 @@ public class RandomChallenge extends Activity implements Button.OnClickListener 
             Log.e("RecogResult", "Clarifai error", e);
             return null;
         }
-    }
-
-    /** Updates the UI by displaying tags for the given result. */
-    private void updateUIForResult(RecognitionResult result) {
-        if (result != null) {
-            if (result.getStatusCode() == RecognitionResult.StatusCode.OK) {
-                // Display the list of tags in the UI.
-                StringBuilder b = new StringBuilder();
-                for (Tag tag : result.getTags()) {
-                    b.append(b.length() > 0 ? ", " : "").append(tag.getName());
-                }
-                //textView.setText("Tags:\n" + b);
-            } else {
-                //Log.e(TAG, "Clarifai: " + result.getStatusMessage());
-                //textView.setText("Sorry, there was an error recognizing your image.");
-            }
-        } else {
-            log.setText("Sorry, there was an error recognizing your image.");
-        }
-        camButton.setEnabled(true);
     }
 }
